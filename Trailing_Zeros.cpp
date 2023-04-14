@@ -18,22 +18,12 @@ int main()
 {
     ll n;
     cin >> n;
-    ll y = fact(n);
-    string x = to_string(y);
-    // cout << x << endl;
-    ll count = 0;
-    for (ll i = x.length() - 1; i >= 0; i--)
+    ll ans = 0;
+    for (ll i = 1; i <= n; i++)
     {
-        if (x[i] == '0')
-        {
-            count++;
-        }
-        else
-        {
-            break;
-        }
+        ans += n / pow(5, i);
     }
-    cout << count << endl;
+    cout << ans << endl;
     return 0;
 }
 // left shift if the number becomes odd then stop
