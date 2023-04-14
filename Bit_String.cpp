@@ -15,7 +15,7 @@ ll power(ll x, ll y, ll p)
         // if y is odd, multiply x with result
         if (y & 1)
             res = (res * x) % p;
-//y must be even now
+        // y must be even now
         y = y >> 1;
         x = (x * x) % p;
     }
@@ -25,7 +25,14 @@ int main()
 {
     ll n;
     cin >> n;
-    cout << power(2, n, n1);
+    // cout << power(2, n, n1);
+    int ans = 1;
+    for (int i = 0; i < n; i++)
+    {
+        ans *= 2;
+        ans %= n1;
+    }
+    cout << ans << endl;
 
     return 0;
 }
