@@ -3,58 +3,47 @@
 using namespace std;
 const int n1 = 1e9 + 7;
 #define ll long long
-bool cmp(pair<char, int> &a,
-         pair<char, int> &b)
-{
-    return a.second > b.second;
-}
-vector<pair<char, int>> sortf(map<char, int> &M)
-{
-
-    vector<pair<char, int>> A;
-    for (auto &it : M)
-    {
-        A.push_back(it);
-    }
-    sort(A.begin(), A.end(), cmp);
-    return A;
-}
 int main()
 {
     string s;
     cin >> s;
-    int a = s.size();
-    map<char, int> mp;
-    string ans = "";
-    for (int i = 0; i < a; i++)
+    unordered_map<char, int> mp;
+    for (int i = 0; i < s.size(); i++)
     {
         mp[s[i]]++;
-    };
-    vector<pair<char, int>> v = sortf(mp);
-    // for (auto &it : v)
-    // {
+    }
+    int count = 0;
+    char odd;
+    for (auto &it : mp)
+    {
+        if (it.second % 2 != 0)
+        {
+            count++;
+            odd = it.first;
+        }
+    }
+    if (count > 1 && s.size() > 1)
+    {
+        cout << "NO SOLUTION" << endl;
+    }
+    else
+    {
+        string s1 = "", s2 = "";
+        for (auto &x : mp)
+        {
+            string s(x.second / 2, x.first);
+            s1 += s;
+            s2 = s + s2;
+        }
+        if (count == 1)
+        {
+            cout << (s1 + odd + s2);
+        }
+        else
+        {
+            cout << (s1 + s2);
+        }
+    }
 
-    //     cout << it.first << ' '
-    //          << it.second << endl;
-    // }
-    for (auto &it : v)
-    {
-        for (int i = 0; i < it.second / 2; i++)
-        {
-            ans += it.first;
-            cout << it.first;
-        }
-        if (it.second == 1)
-        {
-            ans += it.first;
-            cout << it.first;
-        }
-    }
-    for (int i = ans.size() - 2; i >= 0; i--)
-    {
-        ans += ans[i];
-        cout << ans[i];
-    }
-    // cout << ans << endl;
     return 0;
 }
