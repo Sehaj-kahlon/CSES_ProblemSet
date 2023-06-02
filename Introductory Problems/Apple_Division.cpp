@@ -3,7 +3,7 @@
 using namespace std;
 const int n1 = 1e9 + 7;
 #define ll long long
-//
+
 int main()
 {
    int n;
@@ -13,32 +13,36 @@ int main()
    {
       cin >> arr[i];
    }
+   int i = 0, j = n - 1;
    int sum1 = 0, sum2 = 0;
    sort(arr, arr + n);
-   for (int i = 0; i < n / 2; i++)
+   while (i < j)
    {
-      // odd i
+      // odd
       if (i & 1)
       {
-         sum2 += arr[i] + arr[n - 1 - i];
+         sum2 += (arr[i] + arr[j]);
+         i++;
+         j--;
       }
       else
       {
-         sum1 += arr[i] + arr[n - 1 - i];
+         sum1 += (arr[i] + arr[j]);
+         i++;
+         j--;
+      }
+      if (i == j)
+      {
+         if (sum1 < sum2)
+         {
+            sum1 += arr[i];
+         }
+         else
+         {
+            sum2 += arr[i];
+         }
       }
    }
-   if (n & 1)
-   {
-      if (sum1 <= sum2)
-      {
-         sum1 += arr[n / 2];
-      }
-      else
-      {
-         sum2 += arr[n / 2];
-      }
-   }
-
    cout << abs(sum1 - sum2) << endl;
 
    return 0;
